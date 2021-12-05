@@ -19,6 +19,19 @@ class OrderItemsRepository extends ServiceEntityRepository
         parent::__construct($registry, OrderItems::class);
     }
 
+    public function findTotalRevenue(): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = '
+            SELECT sum(price) as revenue FROM order_items
+            ';
+        $stmt = $conn->prepare($sql);
+        $result = $stmt->executeQuery();
+
+        return $result->fetchAllAssociative();
+    }
+
     // /**
     //  * @return OrderItems[] Returns an array of OrderItems objects
     //  */

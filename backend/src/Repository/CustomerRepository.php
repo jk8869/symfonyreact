@@ -19,6 +19,19 @@ class CustomerRepository extends ServiceEntityRepository
         parent::__construct($registry, Customer::class);
     }
 
+    public function findMinAndMaxId(): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = '
+            SELECT min(id) as minId, max(id) as maxId FROM customer
+            ';
+        $stmt = $conn->prepare($sql);
+        $result = $stmt->executeQuery();
+
+        return $result->fetchAllAssociative();
+    }
+
     // /**
     //  * @return Customer[] Returns an array of Customer objects
     //  */

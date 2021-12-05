@@ -19,6 +19,18 @@ class OrderRepository extends ServiceEntityRepository
         parent::__construct($registry, Order::class);
     }
 
+    public function findMinAndMaxId(): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = '
+            SELECT min(id) as minId, max(id) as maxId FROM `order`
+            ';
+        $stmt = $conn->prepare($sql);
+        $result = $stmt->executeQuery();
+        return $result->fetchAllAssociative();
+    }
+
     // /**
     //  * @return Order[] Returns an array of Order objects
     //  */
