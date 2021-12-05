@@ -152,7 +152,7 @@ class DataController extends AbstractController
             $order->setCustomer($customer);
 
             $start = strtotime("10 September 2019");
-            $end = strtotime("05 December 2020");
+            $end = strtotime("05 December 2021");
 
             $timestamp = mt_rand($start, $end);
             $randomDate = date("Y-m-d H:i:s", $timestamp);
@@ -182,6 +182,11 @@ class DataController extends AbstractController
             $entityManager->persist($orderItems);
             $entityManager->flush();
         }
+
+        $response = new Response(json_encode(array('result' => 'true')));
+        $response->headers->set('Content-Type', 'application/json');
+
+        return $response;
     }
 
     private function generateEAN()

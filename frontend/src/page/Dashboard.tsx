@@ -1,16 +1,18 @@
 import React, { useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import CardItem from '../component/CardItem';
-import { requestTotalCustomers, requestTotalOrders, requestTotalRevenue } from '../redux/actions';
+import { requestTimeFrame, requestTotalCustomers, requestTotalOrders, requestTotalRevenue } from '../redux/actions';
+import Chart from '../component/Chart';
 
 const Dashboard = (props : any) => {
   const dispatch = useDispatch();
-  const { totalCustomers, totalOrders, totalRevenue } = props;
+  const { totalCustomers, totalOrders, totalRevenue, timeframe } = props;
 
   useEffect(() => {
     dispatch(requestTotalCustomers());
     dispatch(requestTotalOrders());
     dispatch(requestTotalRevenue());
+    dispatch(requestTimeFrame());
   }, []);
 
   return (
@@ -19,6 +21,9 @@ const Dashboard = (props : any) => {
         <CardItem title="Total Customer" value={totalCustomers} />
         <CardItem title="Total Orders" value={totalOrders} />
         <CardItem title="Total Revenue" value={totalRevenue} />
+      </div>
+      <div className="row">
+        <Chart timeframe={timeframe} />
       </div>
     </div>
   );
@@ -29,7 +34,8 @@ const mapStateToProps = (state: any) => ({
   totalOrders: state.totalOrders,
   totalRevenue: state.totalRevenue,
   customerLoading: state.customerLoading,
-  totalCustomerFailed: state.totalCustomerFailed
+  totalCustomerFailed: state.totalCustomerFailed,
+  timeframe: state.timeframe,
 });
 
 export default connect(mapStateToProps)(Dashboard);

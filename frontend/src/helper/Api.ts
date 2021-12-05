@@ -27,4 +27,12 @@ export class Api {
         .catch((e: any) => throws(e));
       return totalRevenue;
     };
+
+    getTimeFrame = async () => {
+      const timeframe = await axios.get(`${this.apiUrl}/timeframe`)
+        .then((response: any) => response.data)
+        .then((data : any) => data)
+        .catch((e: any) => throws(e));
+      return timeframe;
+    };
 }

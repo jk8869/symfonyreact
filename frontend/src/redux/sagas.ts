@@ -1,6 +1,6 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import { Api } from '../helper/Api';
-import { TOTAL_CUSTOMER_FAILED, TOTAL_CUSTOMER_REQUESTED, TOTAL_CUSTOMER_SUCCEEDED, TOTAL_ORDER_FAILED, TOTAL_ORDER_REQUESTED, TOTAL_ORDER_SUCCEEDED, TOTAL_REVENUE_FAILED, TOTAL_REVENUE_REQUESTED, TOTAL_REVENUE_SUCCEEDED } from './constants';
+import { TIME_FRAME_FAILED, TIME_FRAME_REQUESTED, TIME_FRAME_SUCCEEDED, TOTAL_CUSTOMER_FAILED, TOTAL_CUSTOMER_REQUESTED, TOTAL_CUSTOMER_SUCCEEDED, TOTAL_ORDER_FAILED, TOTAL_ORDER_REQUESTED, TOTAL_ORDER_SUCCEEDED, TOTAL_REVENUE_FAILED, TOTAL_REVENUE_REQUESTED, TOTAL_REVENUE_SUCCEEDED } from './constants';
 
 export function* getTotalCustomers(): any {
   try {
@@ -32,8 +32,19 @@ export function* getTotalRevenue(): any {
   }
 }
 
+export function* getTimeFrame(): any {
+  try {
+    const api = new Api();
+    const timeframe = yield call(api.getTimeFrame);
+    yield put({ type: TIME_FRAME_SUCCEEDED, payload: timeframe });
+  } catch (e) {
+    yield put({ type: TIME_FRAME_FAILED, payload: true });
+  }
+}
+
 export function* appSaga() {
   yield takeEvery(TOTAL_CUSTOMER_REQUESTED, getTotalCustomers);
   yield takeEvery(TOTAL_ORDER_REQUESTED, getTotalOrders);
   yield takeEvery(TOTAL_REVENUE_REQUESTED, getTotalRevenue);
+  yield takeEvery(TIME_FRAME_REQUESTED, getTimeFrame);
 }

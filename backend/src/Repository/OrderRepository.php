@@ -31,6 +31,21 @@ class OrderRepository extends ServiceEntityRepository
         return $result->fetchAllAssociative();
     }
 
+    public function getTimeFrameData(): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = '
+            SELECT COUNT(customer_id) as customers, count(id) as orders, purchase_date FROM `order` 
+            WHERE purchase_date > NOW() - INTERVAL 1 MONTH
+            GROUP BY DAY(purchase_date), MONTH(purchase_date), YEAR(purchase_date) ORDER BY purchase_date DESC
+            ';
+        $stmt = $conn->prepare($sql);
+        $result = $stmt->executeQuery();
+
+        return $result->fetchAllAssociative();
+    }
+
     // /**
     //  * @return Order[] Returns an array of Order objects
     //  */
