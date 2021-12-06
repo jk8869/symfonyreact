@@ -1,6 +1,6 @@
 import { TOTAL_CUSTOMER_REQUESTED, TOTAL_CUSTOMER_SUCCEEDED, TOTAL_CUSTOMER_FAILED,
   TOTAL_ORDER_REQUESTED, TOTAL_ORDER_SUCCEEDED, TOTAL_ORDER_FAILED, TOTAL_REVENUE_REQUESTED,
-  TOTAL_REVENUE_SUCCEEDED, TOTAL_REVENUE_FAILED, TIME_FRAME_REQUESTED, TIME_FRAME_SUCCEEDED, TIME_FRAME_FAILED } from './constants';
+  TOTAL_REVENUE_SUCCEEDED, TOTAL_REVENUE_FAILED, TIME_FRAME_REQUESTED, TIME_FRAME_SUCCEEDED, TIME_FRAME_FAILED, SET_START_DATE, SET_END_DATE } from './constants';
 import { Action } from './reducers';
 
 export const requestTotalCustomers = () : Action => ({
@@ -61,4 +61,14 @@ export const recivedTimeFrame = (timeframe: any) : Action => ({
 export const timeFrameFailed = () : Action => ({
   type: TIME_FRAME_FAILED,
   payload: true
+});
+
+export const putStartDate = (date: String): Action => ({
+  type: SET_START_DATE,
+  payload: date
+});
+
+export const putEndDate = (date:String): Action => ({
+  type: SET_END_DATE,
+  payload: date
 });

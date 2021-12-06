@@ -46,6 +46,16 @@ class OrderRepository extends ServiceEntityRepository
         return $result->fetchAllAssociative();
     }
 
+    public function findTotalOrders($startDate, $endDate){
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.purchaseDate >= :val1')
+            ->andWhere('c.purchaseDate <= :val2')
+            ->setParameter('val1', $startDate)
+            ->setParameter('val2', $endDate)
+            ->getQuery()
+            ->getResult();
+    }
+
     // /**
     //  * @return Order[] Returns an array of Order objects
     //  */

@@ -47,6 +47,16 @@ class CustomerRepository extends ServiceEntityRepository
         return $result->fetchAllAssociative();
     }
 
+    public function findTotalCustomers($startDate, $endDate){
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.createDate >= :val1')
+            ->andWhere('c.createDate <= :val2')
+            ->setParameter('val1', $startDate)
+            ->setParameter('val2', $endDate)
+            ->getQuery()
+            ->getResult();
+    }
+
     // /**
     //  * @return Customer[] Returns an array of Customer objects
     //  */

@@ -19,15 +19,17 @@ class OrderItemsRepository extends ServiceEntityRepository
         parent::__construct($registry, OrderItems::class);
     }
 
-    public function findTotalRevenue(): array
+    public function findTotalRevenue($startDate, $endDate): array
     {
         $conn = $this->getEntityManager()->getConnection();
 
         $sql = '
-            SELECT sum(price) as revenue FROM order_items
+            SELECT sum(a.price) AS revenue FROM order_items a
+            INNER JOIN `order` b ON a.order_header_id = b.id
+            WHERE b.purchase_date >= :val1 AND b.purchase_date <= :val2
             ';
         $stmt = $conn->prepare($sql);
-        $result = $stmt->executeQuery();
+        $result = $stmt->executeQuery(array(':val1' => $startDate, ':val2' => $endDate));
 
         return $result->fetchAllAssociative();
     }

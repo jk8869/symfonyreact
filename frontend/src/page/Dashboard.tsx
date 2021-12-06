@@ -3,6 +3,7 @@ import { connect, useDispatch } from 'react-redux';
 import CardItem from '../component/CardItem';
 import { requestTimeFrame, requestTotalCustomers, requestTotalOrders, requestTotalRevenue } from '../redux/actions';
 import Chart from '../component/Chart';
+import DateRangePicker from '../component/DateRangePicker';
 
 const Dashboard = (props : any) => {
   const dispatch = useDispatch();
@@ -18,6 +19,7 @@ const Dashboard = (props : any) => {
   return (
     <div>
       <div className="row">
+        <DateRangePicker />
         <CardItem title="Total Customer" value={totalCustomers} />
         <CardItem title="Total Orders" value={totalOrders} />
         <CardItem title="Total Revenue" value={totalRevenue} />

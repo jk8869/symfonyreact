@@ -1,4 +1,7 @@
-import { TOTAL_CUSTOMER_REQUESTED, TOTAL_CUSTOMER_SUCCEEDED, TOTAL_CUSTOMER_FAILED, TOTAL_ORDER_REQUESTED, TOTAL_ORDER_SUCCEEDED, TOTAL_ORDER_FAILED, TOTAL_REVENUE_REQUESTED, TOTAL_REVENUE_SUCCEEDED, TOTAL_REVENUE_FAILED, TIME_FRAME_REQUESTED, TIME_FRAME_SUCCEEDED, TIME_FRAME_FAILED } from './constants';
+import { TOTAL_CUSTOMER_REQUESTED, TOTAL_CUSTOMER_SUCCEEDED, TOTAL_CUSTOMER_FAILED,
+  TOTAL_ORDER_REQUESTED, TOTAL_ORDER_SUCCEEDED, TOTAL_ORDER_FAILED, TOTAL_REVENUE_REQUESTED,
+  TOTAL_REVENUE_SUCCEEDED, TOTAL_REVENUE_FAILED, TIME_FRAME_REQUESTED, TIME_FRAME_SUCCEEDED,
+  TIME_FRAME_FAILED, SET_START_DATE, SET_END_DATE } from './constants';
 
 const initialState = {
   totalCustomers: 0,
@@ -15,6 +18,9 @@ const initialState = {
   totalOrdersFailed: false,
   totalRevenueFailed: false,
   timeFrameFailed: false,
+
+  startDate: '2014-01-01',
+  endDate: '2021-12-05'
 };
 
 export type Action = {type: String, payload: any};
@@ -59,6 +65,13 @@ export const appReducer = (
 
     case TIME_FRAME_FAILED:
       return { ...state, timeframeFailed: true };
+
+    case SET_START_DATE:
+      console.log('start date', action.payload);
+      return { ...state, startDate: action.payload };
+
+    case SET_END_DATE:
+      return { ...state, endDate: action.payload };
 
     default:
       return state;
