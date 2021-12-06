@@ -32,6 +32,21 @@ class CustomerRepository extends ServiceEntityRepository
         return $result->fetchAllAssociative();
     }
 
+    public function getTimeFrameData(): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = '
+            SELECT COUNT(id) as customers, create_date FROM `customer` 
+            WHERE create_date > NOW() - INTERVAL 1 MONTH
+            GROUP BY DAY(create_date), MONTH(create_date), YEAR(create_date) ORDER BY create_date DESC
+            ';
+        $stmt = $conn->prepare($sql);
+        $result = $stmt->executeQuery();
+
+        return $result->fetchAllAssociative();
+    }
+
     // /**
     //  * @return Customer[] Returns an array of Customer objects
     //  */

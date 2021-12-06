@@ -36,7 +36,7 @@ class OrderRepository extends ServiceEntityRepository
         $conn = $this->getEntityManager()->getConnection();
 
         $sql = '
-            SELECT COUNT(customer_id) as customers, count(id) as orders, purchase_date FROM `order` 
+            SELECT count(id) as orders, purchase_date FROM `order` 
             WHERE purchase_date > NOW() - INTERVAL 1 MONTH
             GROUP BY DAY(purchase_date), MONTH(purchase_date), YEAR(purchase_date) ORDER BY purchase_date DESC
             ';

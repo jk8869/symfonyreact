@@ -135,6 +135,7 @@ class DataController extends AbstractController
             $customer->setFirstName($firstname[rand ( 0 , count($firstname) -1)]);
             $customer->setLastName($lastname[rand ( 0 , count($lastname) -1)] . ($i + 1));
             $customer->setEmail('example'.($i + 1).'@email.com');
+            $customer->setCreateDate(new DateTime($this->getRandDate()));
 
             $entityManager->persist($customer);
             $entityManager->flush();
@@ -151,13 +152,7 @@ class DataController extends AbstractController
             $order = new Order();
             $order->setCustomer($customer);
 
-            $start = strtotime("10 September 2019");
-            $end = strtotime("05 December 2021");
-
-            $timestamp = mt_rand($start, $end);
-            $randomDate = date("Y-m-d H:i:s", $timestamp);
-
-            $order->setPurchaseDate(new DateTime($randomDate));
+            $order->setPurchaseDate(new DateTime($this->getRandDate()));
             $order->setCountry($country[rand ( 0 , count($country) -1)]);
             $order->setDevice($device[rand ( 0 , count($device) -1)]);
 
@@ -204,5 +199,14 @@ class DataController extends AbstractController
         }
         $code .= (10 - ($sum % 10)) % 10;
         return $code;
+    }
+
+    private function getRandDate(){
+        $start = strtotime("10 September 2019");
+        $end = strtotime("05 December 2021");
+
+        $timestamp = mt_rand($start, $end);
+        $randomDate = date("Y-m-d H:i:s", $timestamp);
+        return $randomDate;
     }
 }

@@ -23,25 +23,4 @@ class OrderController extends AbstractController
 
         return $response;
     }
-
-    /**
-     * @Route("/timeframe", name="timeframe")
-     */
-    public function timeFrame(ManagerRegistry $doctrine): Response
-    {
-        $repository = $doctrine->getRepository(Order::class);
-        $timeFrameData = $repository->getTimeFrameData();
-        $responseData = [];
-        foreach ($timeFrameData as $data){
-            $responseData[] = array(
-                'customers' => $data['customers'],
-                'orders'    => $data['orders'],
-                'date'      => $data['purchase_date'],
-            );
-        }
-        $response = new Response(json_encode($responseData));
-        $response->headers->set('Content-Type', 'application/json');
-
-        return $response;
-    }
 }

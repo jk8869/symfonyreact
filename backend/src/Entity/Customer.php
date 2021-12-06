@@ -39,6 +39,11 @@ class Customer
      */
     private $orders;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $createDate;
+
     public function __construct()
     {
         $this->orders = new ArrayCollection();
@@ -111,6 +116,18 @@ class Customer
                 $order->setCustomer(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCreateDate(): ?\DateTimeInterface
+    {
+        return $this->createDate;
+    }
+
+    public function setCreateDate(\DateTimeInterface $createDate): self
+    {
+        $this->createDate = $createDate;
 
         return $this;
     }
