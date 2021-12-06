@@ -6,8 +6,8 @@ import { putStartDate, putEndDate, requestTotalCustomers, requestTotalOrders, re
 import 'react-datepicker/dist/react-datepicker.css';
 
 const DateRangePicker = () => {
-  const [startDate, setStartDate] = useState(new Date('2014/02/08'));
-  const [endDate, setEndDate] = useState(new Date('2014/02/10'));
+  const [startDate, setStartDate] = useState(new Date('2021/02/08'));
+  const [endDate, setEndDate] = useState(new Date('2021/02/10'));
   const dispatch = useDispatch();
   return (
     <div>

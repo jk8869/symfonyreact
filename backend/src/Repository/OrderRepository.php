@@ -48,8 +48,8 @@ class OrderRepository extends ServiceEntityRepository
 
     public function findTotalOrders($startDate, $endDate){
         return $this->createQueryBuilder('c')
-            ->andWhere('c.purchaseDate >= :val1')
-            ->andWhere('c.purchaseDate <= :val2')
+            ->andWhere('c.purchase_date >= :val1')
+            ->andWhere('c.purchase_date <= :val2')
             ->setParameter('val1', $startDate)
             ->setParameter('val2', $endDate)
             ->getQuery()
