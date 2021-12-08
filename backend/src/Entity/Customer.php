@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass=CustomerRepository::class)
  */
-class Customer
+class Customer extends AbstractEntity
 {
     /**
      * @ORM\Id
@@ -116,18 +116,6 @@ class Customer
                 $order->setCustomer(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getCreateDate(): ?\DateTimeInterface
-    {
-        return $this->createDate;
-    }
-
-    public function setCreateDate(\DateTimeInterface $createDate): self
-    {
-        $this->createDate = $createDate;
 
         return $this;
     }
