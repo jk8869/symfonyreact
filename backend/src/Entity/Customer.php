@@ -39,11 +39,6 @@ class Customer extends AbstractEntity
      */
     private $orders;
 
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private $createDate;
-
     public function __construct()
     {
         $this->orders = new ArrayCollection();
