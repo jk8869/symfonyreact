@@ -1,7 +1,14 @@
-FROM node:alpine
+FROM node:14-alpine AS development
+ENV NODE_ENV development
+# Add a work directory
 WORKDIR /app
-COPY ./frontend/package.json ./
-COPY /frontend/package-lock.json ./
-COPY ./ ./
-RUN npm i
-CMD ["npm", "run", "start"]
+# Cache and Install dependencies
+COPY ./frontend/package.json .
+COPY ./frontend/yarn.lock .
+RUN yarn install
+# Copy app files
+COPY . .
+# Expose port
+EXPOSE 3000
+# Start the app
+CMD [ "yarn", "start" ]
