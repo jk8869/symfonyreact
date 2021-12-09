@@ -41,3 +41,10 @@ This will point to DataController and inside index function we generates data fo
 There is an Abstract class named AbstractEntity to keep common fields for Entity clasees
 
 There is also Interface including getTimeFrameData which is implemented by CustomerRepository and OrderRepository to get data for timeframe chats in fornend
+
+## Frontend Document
+
+For frontend side all interaction between app an api controls with redux, redux-saga
+Ther is an Api class to implement out api requests
+
+And all actions, reudcer, sagas are defined in redux folder
