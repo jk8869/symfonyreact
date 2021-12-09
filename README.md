@@ -4,6 +4,8 @@ This is a simple dashboard build by symfony for backedn and react for frontend
 
 ## Installation
 
+for settingup an exting symfony project please refer to  [settin up](https://symfony.com/doc/current/setup.html#setting-up-an-existing-symfony-project)
+
 To run backend server after install symfony:
 ```bash
 cd backend 
@@ -29,3 +31,13 @@ yarn start
 ```
 
 there is also a docker file on root of project as well as related docker directory and you can use it
+
+## Backend Document
+
+To generate dummy data you can call /data
+
+This will point to DataController and inside index function we generates data for all necessary tables
+
+There is an Abstract class named AbstractEntity to keep common fields for Entity clasees
+
+There is also Interface including getTimeFrameData which is implemented by CustomerRepository and OrderRepository to get data for timeframe chats in fornend
